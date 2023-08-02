@@ -84,7 +84,7 @@ def Button(source, destination):
         destination.configure(state='disabled')
 if __name__ == '__main__':
     window = tkinter.Tk()
-    window.title('翻译')
+    window.title('我的翻译')
     window.geometry('500x290')
     window.resizable(0, 0)
     source = tkinter.Text(window, font=('微软雅黑', 10))
