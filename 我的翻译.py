@@ -22,7 +22,6 @@ def Translate(content, from_lang, to_lang):
         r = requests.post(url, params=payload, headers=headers)
     except:
         return '网络错误!'
-    # print(r.url)
     json = r.json()
     result = jsonpath.jsonpath(json, '$..dst')
     yield result
@@ -55,12 +54,9 @@ def Button(source, destination):
         destination.configure(state='disabled')
         return
     from_lang = Language_recognition(text)
-    # print('hello')
     if from_lang != 'zh':
         to_lang = 'zh'
-        # result = ''.join(list(Translate(text, from_lang, to_lang)))
         result = list(Translate(text, from_lang, to_lang))
-        # print(result)
         for i in result:
             result = ''.join(i)
         destination.configure(state=tkinter.NORMAL)
@@ -70,14 +66,12 @@ def Button(source, destination):
     elif from_lang == 'zh':
         to_lang = 'en'
         result = list(Translate(text, from_lang, to_lang))
-        # print(result)
         for i in result:
             result = ''.join(i)
         destination.configure(state=tkinter.NORMAL)
         destination.delete(1.0, 'end')
         destination.insert('end', result)
         destination.configure(state='disabled')
-
     elif from_lang is False:
         destination.configure(state=tkinter.NORMAL)
         destination.delete(1.0, 'end')
@@ -103,7 +97,6 @@ if __name__ == '__main__':
     left.place(x=20, y=6)
     right.place(x=270, y=6)
     text = source.get(1.0, 'end')
-    # button = ttk.Button(window, text='翻译', height=1, width=10, command=lambda: Button(source, destination))
     button = ttk.Button(window, text='翻译', width=10, command=lambda: Button(source, destination))
     button.place(x=400, y=250)
     poem = eval(requests.get(r'https://v1.jinrishici.com/all.json').content.decode())
